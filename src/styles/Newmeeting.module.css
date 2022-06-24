@@ -1,0 +1,81 @@
+.modalwrapper {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 0.5rem;
+  width: 90%;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 2rem 1.5rem;
+  position: fixed;
+  z-index: 1;
+  background-color: white;
+  border-radius: 0.5rem;
+  inset: 0;
+}
+
+.loading {
+  margin: auto;
+  position: absolute;
+  inset: 0;
+}
+
+.header {
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy {
+  margin: 1.5rem 0;
+  color: rgb(82, 82, 82);
+}
+
+.roomid {
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  background-color: whitesmoke;
+  color: rgb(82, 82, 82);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.share {
+  background-color: #1864AC;
+  color: white;
+  box-sizing: border-box;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin: 1rem auto;
+  border-radius: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.xmark {
+  height: 1.5rem;
+}
+
+.copyicon {
+  height: 1rem;
+}
+
+.clipboard {
+  background-color: transparent;
+  width: fit-content;
+  color: grey;
+}
+
+@media screen and (min-width: 700px) {
+  .popup {
+    width: 650px;
+    margin: auto;
+  }
+  .roomid {
+    justify-content: center;
+    gap: 2rem;
+  }
+}

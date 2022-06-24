@@ -1,0 +1,133 @@
+.homewrapper {
+  width: 100%;
+  height: 100vh;
+}
+
+.homeheader {
+  font-size: 1.5rem;
+  font-weight: 400;
+  width: fit-content;
+  padding: 1.5rem;
+  margin: auto;
+}
+
+.hometop {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.newmeeting, .joinwith {
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  margin: auto;
+  background-color: rgb(24, 100, 172);
+  color: white;
+  width: 45%;
+  height: 2.5rem;
+  text-align: center;
+  border-radius: 0.4rem;
+  border: none;
+}
+
+.joinwith {
+  background-color: transparent;
+  color: rgb(24, 100, 172);
+  border: 1px solid grey;
+}
+
+.middle {
+  margin-top: 8rem;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dl {
+  width: fit-content;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.dt {
+  width: fit-content;
+  margin: auto;
+  font-size: 1.2rem;
+}
+
+.dd {
+  margin: auto;
+  padding: 1rem;
+  width: fit-content;
+  text-align: center;
+  color: grey;
+}
+
+.meeting {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 100%;
+  background-color: rgb(183, 180, 180);
+}
+
+.page2 {
+  width: 95%;
+  margin: auto;
+}
+
+.header2 {
+  width: 100%;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow, .joinbtn {
+  color: rgb(173, 172, 172);
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  font-size: 1.1rem;
+}
+
+.headerjoin {
+  box-sizing: border-box;
+  padding: 0 1rem;
+  flex: 1;
+  font-size: 1.3rem;
+}
+
+.entercode {
+  width: 100%;
+  margin: auto;
+  color: rgb(42, 42, 42);
+}
+
+.entercodeinput {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1.5rem auto;
+  padding: 0 1.5rem;
+  height: 3rem;
+  background-color: rgb(240, 240, 240);
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+}
+
+@media screen and (min-width: 700px) {
+  .homewrapper {
+    width: 700px;
+    margin: auto;
+  }
+
+  .page2 {
+    width: 700px
+  }
+}
