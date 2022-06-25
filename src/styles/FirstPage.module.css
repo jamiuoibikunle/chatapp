@@ -1,6 +1,7 @@
 .homewrapper {
   width: 100%;
   height: 100vh;
+  position: relative;
 }
 
 .homeheader {
@@ -39,13 +40,22 @@
 }
 
 .middle {
-  margin-top: 8rem;
   width: 100%;
   height: fit-content;
+  position: absolute;
+  margin: auto;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.meeting {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 100%;
+  background-color: rgb(183, 180, 180);
 }
 
 .dl {
@@ -68,57 +78,38 @@
   color: grey;
 }
 
-.meeting {
-  width: 15rem;
-  height: 15rem;
-  border-radius: 100%;
-  background-color: rgb(183, 180, 180);
-}
-
-.page2 {
+.newJoin {
   width: 95%;
+  height: fit-content;
+  box-sizing: border-box;
+  padding: 1rem;
+  position: absolute;
+  margin: auto;
+  inset: 0;
+}
+
+.notify {
+  color: grey;
+  width: fit-content;
   margin: auto;
 }
 
-.header2 {
-  width: 100%;
-  margin: 2rem auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.arrow, .joinbtn {
-  color: rgb(173, 172, 172);
-  background-color: transparent;
-  outline: none;
-  border: 0;
-  font-size: 1.1rem;
-}
-
-.headerjoin {
-  box-sizing: border-box;
-  padding: 0 1rem;
-  flex: 1;
-  font-size: 1.3rem;
-}
-
-.entercode {
-  width: 100%;
-  margin: auto;
-  color: rgb(42, 42, 42);
-}
-
-.entercodeinput {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 1.5rem auto;
-  padding: 0 1.5rem;
-  height: 3rem;
-  background-color: rgb(240, 240, 240);
+.proceed {
+  background-color: rgb(24, 100, 172);
+  color: white;
+  border-radius: 0.4rem;
   border: none;
-  outline: none;
-  border-radius: 0.5rem;
+  width: fit-content;
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  margin: 0.7rem auto;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+  transform: scale(1);
+  animation: proceed 8s infinite forwards ease-out;
 }
 
 @media screen and (min-width: 700px) {
@@ -126,8 +117,16 @@
     width: 700px;
     margin: auto;
   }
+}
 
-  .page2 {
-    width: 700px
+@keyframes proceed {
+  10% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+  90% {
+    transform: scale(0.7);
   }
 }

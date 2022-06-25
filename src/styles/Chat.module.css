@@ -1,3 +1,14 @@
+.nochat {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  inset: 0;
+  margin: auto;
+  box-sizing: border-box;
+  color: #5e9fdc;
+  font-size: 1.2rem;
+}
+
 .inputs {
   width: 95%;
   height: 3rem;
@@ -8,7 +19,7 @@
   margin: 1rem auto;
   display: flex;
   box-sizing: border-box;
-  border: 1px solid grey;
+  border: 1px solid #5e9fdc;
   border-radius: 1rem;
 }
 
@@ -31,33 +42,85 @@
   border-radius: 1rem 0 0 1rem;
 }
 
+.input:focus {
+  outline: 1px solid black;
+}
+
 .button {
   width: 20%;
   height: 100%;
-  background-color: rgb(38, 97, 38);
+  background-color: #5e9fdc;
   color: white;
   border-radius: 0 1rem 1rem 0;
   border: none;
+}  
+
+.me .msg {
+  color: white;
+  position: relative;
+  padding: 0.3rem;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0.7rem;
+  font-size: 0.9rem;
+}  
+
+.memessagewrapper {
+  box-sizing: border-box;
+  margin: 0;
+  width: fit-content;
 }
 
 .me {
-  background-color: rgb(38, 97, 38);
-  border-radius: 0.2rem;
-  color: whitesmoke;
+  padding: 0.3rem 1rem;
+  background-color: #5e9fdc;  
+  border-radius: 0.2rem 0.7rem;
   width: fit-content;
-  padding: 0.5rem;
+  max-width: 70%;
   box-sizing: border-box;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
   margin-left: auto;
   margin-right: 0;
+}  
+
+.hemessagewrapper {
+  background-color: #ebebeb;
+  border-radius: 0.2rem 0.7rem;
+  padding: 0.3rem 1rem;
+  box-sizing: border-box;
+  margin: 0;
+  width: fit-content;
+}  
+
+.he .msg {
+  color: rgb(29, 29, 29);
+  position: relative;
+  padding: 0.3rem;
+  padding-left: 0;
+  padding-top: 0;
+  padding-bottom: 0.7rem;
+  font-size: 0.9rem;
+}
+
+.time {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 0.6rem;
 }
 
 .he {
-  background-color: rgb(122, 84, 13);
-  border-radius: 0.2rem;
-  color: whitesmoke;
   width: fit-content;
-  padding: 0.5rem;
-  margin: 0.2rem;
+  max-width: 70%;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.sender {
+  background-color: transparent;
+  color: #de582f;
+  font-size: 0.8rem;
   box-sizing: border-box;
 }

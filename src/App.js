@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from 'react'
 import './App.css';
 import io from 'socket.io-client'
 import Chat from './Chat';
-import Home from './Home';
+import SecondPage from './pages/SecondPage';
+import FirstPage from './pages/FirstPage';
 import styles from './styles/App.module.css'
-// const socket = io.connect('https://mi-chatapp.herokuapp.com/')
-const socket = io.connect('http://localhost:3001')
+import ThirdPage from './pages/ThirdPage';
+const socket = io.connect('https://mi-chatapp.herokuapp.com/')
+// const socket = io.connect('http://localhost:3001')
 
 function App() {
 
@@ -17,12 +19,18 @@ function App() {
   const [ isModalLoading, setIsModalLoading ] = useState()
   const [ isModal, setIsModal ] = useState(false)
   const [ roomCode, setRoomCode ] = useState('')
+  const [ joinStatus, setJoinStatus ] = useState('')
+  const [ msgOnJoin, setMsgOnJoin ] = useState('')
+  const [ dispName, setDispName ] = useState(localStorage.getItem('display_name') || '')
+  const [ onNewJoin, setOnNewJoin ] = useState(false)
   const inputRef = useRef()
   const scrollRef = useRef()
 
+  // window.addEventListener('beforeunload', (e) => e.returnValue = 'Are you sure you want to refresh page? Your session will be lost.')
+
   const sendMessage = () => {
-    setMessages((messages) => [...messages, {message: chat, id: socket.id}])
-    socket.emit('sendMessage', {message: chat, id: socket.id, roomid})
+    setMessages((messages) => [...messages, {message: chat, id: socket.id, sender: dispName, created: new Date()}])
+    socket.emit('sendMessage', {message: chat, id: socket.id, roomid, sender: dispName, created: new Date()})
     setChat('')
   }
   
@@ -37,33 +45,81 @@ function App() {
       setIsModalLoading(false)
     }, 1000);
   }
-
+// Make changes here tomorrow
   const unfocusModal = () => {
     setIsModal(false)
+    // StepThree()
   }
 
   const handleJoin = (e) => {
     setRoomCode(e.target.value);
-
   }
+
+  useEffect(() => {
+    socket.on('joinStatus', (isJoined) => {
+      console.log(isJoined);
+    })
+  }, [joinStatus])
+
+  useEffect(() => {
+    socket.on('newJoin', (newJoin) => {
+      if (newJoin.newJoin === 'True') setOnNewJoin(true)
+    })
+  }, [socket])
+  
+  const getRooms = () => {
+    if ( roomCode.length !== 0 ) {
+    socket.emit('getRooms', (roomCode))
+    setRoomid(roomCode)
+    socket.on('joinStatus', (isJoined) => {
+      if (isJoined.isJoined === 'Success') {
+        StepThree()
+        setMsgOnJoin(`You have successfully joined ${roomCode}`)
+      } else if (isJoined.isJoined === 'Duplicate') {
+        setMsgOnJoin('You are already a member of this room')
+      } else {
+        console.log('Unsuccessful')
+        setMsgOnJoin(`Please check that ${roomCode} is a valid code`)
+      } 
+    })} else {
+      setMsgOnJoin('You cannot leave the field empty')
+    }
+}
+
+    const setDisplayName = (e) => {
+      setDispName(e.target.value)
+    }
+
+    const handleDispName = () => {
+      localStorage.setItem('display_name', dispName)
+      setStep(4)
+    }
 
   console.log(roomid);
 
   useEffect(() => {
-    socket.on('receiveMessage', ({message, id}) => {
-      setMessages([...messages, {message, id}])
+    socket.on('receiveMessage', ({message, id, sender, created}) => {
+      setMessages([...messages, {message, id, sender, created}])
     })
     scrollRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [messages])
 
   console.log(roomCode);
+  
+  const StepOne = () => {
+    setStep(1)
+  }
 
   const StepTwo = () => {
     setStep(2)
   }
 
-  const StepOne = () => {
-    setStep(1)
+  const StepThree = () => {
+    setStep(3)
+  }
+
+  const StepFour = () => {
+    setStep(4)
   }
 
   return (
@@ -82,12 +138,22 @@ function App() {
       isModalLoading,
       StepTwo,
       StepOne,
+      StepThree,
+      StepFour,
       step,
       handleJoin,
-      roomCode
+      roomCode,
+      getRooms,
+      msgOnJoin,
+      dispName,
+      setDisplayName,
+      handleDispName,
+      onNewJoin
       }} className={styles.app}>
-      <Home />
-      {/* <Chat /> */}
+      {step === 1 && <FirstPage />}
+      {step === 2 && <SecondPage />}
+      {step === 3 && <ThirdPage />}
+      {step === 4 && <Chat />}
     </SocketContext.Provider>
   );
 }

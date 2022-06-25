@@ -31,10 +31,8 @@ const NewMeeting = () => {
         </div>
         <div className={styles.roomid}>
           {`localhost:3000/${socket.roomid}`}
-          <CopyToClipboard text={`localhost:3000/${socket.roomid}`} className={styles.clipboard}>
-            <button>
+          <CopyToClipboard text={`${socket.roomid}`} className={styles.clipboard}>
               <img src={copy} className={styles.copyicon} />
-            </button>
           </CopyToClipboard>
         </div>
         <div className={styles.share}>

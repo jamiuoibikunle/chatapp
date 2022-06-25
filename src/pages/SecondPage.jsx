@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import styles from './styles/Home.module.css'
-import meeting from './resources/meeting.png'
+import styles from '../styles/SecondPage.module.css'
 import { useContext } from 'react'
-import SocketContext from './Socket'
-import NewMeeting from './modals/Newmeeting'
+import SocketContext from '../Socket'
 import { ArrowBack } from '@material-ui/icons'
 import { useRef } from 'react'
 
-const Home = () => {
+const SecondPage = () => {
 
   const socket = useContext(SocketContext)
 
@@ -28,40 +26,14 @@ const Home = () => {
     !socket.isModal && setToggle(false)
   }, [socket.isModal])
 
-  return socket.step === 1 ? (
-    <main className={styles.homewrapper}>
-      <NewMeeting />
-      <header className={styles.homeheader}>
-        Mi-Meet
-      </header>
-      <section className={styles.hometop}>
-        <button className={styles.newmeeting} disabled={toggle} onClick={socket.createRoom}>
-          New meeting
-        </button>
-        <button className={styles.joinwith} disabled={toggle} onClick={socket.StepTwo}>
-          Join with a code
-        </button>
-      </section>
-      <section className={styles.middle}>
-        <img src={meeting} className={styles.meeting} alt='Meeting' />
-        <dl className={styles.dl}>
-          <dt className={styles.dt}>
-            Get a link that you can share
-          </dt>
-          <dd className={styles.dd}>
-            Tap new meeting to get a link that you can send to people that you want to meet with
-          </dd>
-        </dl>
-      </section>
-    </main>
-  ) : (
+  return (
     <main className={styles.page2}>
       <section className={styles.header2}>
         <ArrowBack onClick={socket.StepOne} className={styles.arrow} />
         <div className={styles.headerjoin}>
           Join with a code
         </div>
-        <button className={styles.joinbtn} ref={joinRef}>
+        <button className={styles.joinbtn} ref={joinRef} onClick={socket.getRooms}>
           Join
         </button>
       </section>
@@ -71,8 +43,11 @@ const Home = () => {
       <section>
         <input placeholder='Example: rm_1927530912' className={styles.entercodeinput} onChange={socket.handleJoin} />
       </section>
+      <section className={styles.errormsg}>
+        {socket.msgOnJoin}
+      </section>
     </main>
   )
 }
 
-export default Home
+export default SecondPage
