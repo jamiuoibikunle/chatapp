@@ -9,26 +9,37 @@
   font-size: 1.2rem;
 }
 
+.top {
+  width: 100%;
+}
+
+.welcome {
+width: fit-content;
+margin: 1.5rem auto;
+color: grey;
+}
+
 .inputs {
   width: 95%;
   height: 3rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
   margin: 1rem auto;
   display: flex;
   box-sizing: border-box;
-  border: 1px solid #5e9fdc;
+  background-color: white;
   border-radius: 1rem;
+  z-index: 2;
 }
 
 .chats {
   width: 95%;
   margin: auto;
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 7rem);
   overflow: auto;
-  padding: 1.5rem;
+  padding: 1rem 0;
   box-sizing: border-box;
 }
 
@@ -39,11 +50,13 @@
   padding: 1rem;
   margin-bottom: 0.5rem;
   border: none;
+  border: 1px solid #5e9fdc;
   border-radius: 1rem 0 0 1rem;
 }
 
 .input:focus {
-  outline: 1px solid black;
+  border: 2px solid #5e9fdc;
+  outline: none;
 }
 
 .button {
@@ -53,7 +66,7 @@
   color: white;
   border-radius: 0 1rem 1rem 0;
   border: none;
-}  
+}
 
 .me .msg {
   color: white;
@@ -85,7 +98,7 @@
 
 .hemessagewrapper {
   background-color: #ebebeb;
-  border-radius: 0.2rem 0.7rem;
+  border-radius: 0.7rem 0.2rem;
   padding: 0.3rem 1rem;
   box-sizing: border-box;
   margin: 0;

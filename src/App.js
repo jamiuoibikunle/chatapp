@@ -10,16 +10,14 @@ import ThirdPage from './pages/ThirdPage';
 const socket = io.connect('https://mi-chatapp.herokuapp.com/')
 // const socket = io.connect('http://localhost:3001')
 
-function App() {
+function App({children}) {
 
   const [ step, setStep ] = useState(1)
   const [ chat, setChat ] = useState('')
   const [ messages, setMessages ] = useState([])
   const [ roomid, setRoomid ] = useState('')
-  const [ isModalLoading, setIsModalLoading ] = useState()
   const [ isModal, setIsModal ] = useState(false)
   const [ roomCode, setRoomCode ] = useState('')
-  const [ joinStatus, setJoinStatus ] = useState('')
   const [ msgOnJoin, setMsgOnJoin ] = useState('')
   const [ dispName, setDispName ] = useState(localStorage.getItem('display_name') || '')
   const [ onNewJoin, setOnNewJoin ] = useState(false)
@@ -39,16 +37,13 @@ function App() {
     for ( let i = 0; i < 10; i++ ) { randomNum += Math.floor(Math.random() * 9)}
     setRoomid(randomNum)
     socket.emit('createRoom', randomNum)
-    setIsModalLoading(true)
     setTimeout(() => {
       setIsModal(true)
-      setIsModalLoading(false)
     }, 1000);
   }
-// Make changes here tomorrow
+
   const unfocusModal = () => {
     setIsModal(false)
-    // StepThree()
   }
 
   const handleJoin = (e) => {
@@ -56,17 +51,11 @@ function App() {
   }
 
   useEffect(() => {
-    socket.on('joinStatus', (isJoined) => {
-      console.log(isJoined);
-    })
-  }, [joinStatus])
-
-  useEffect(() => {
     socket.on('newJoin', (newJoin) => {
       if (newJoin.newJoin === 'True') setOnNewJoin(true)
     })
   }, [socket])
-  
+
   const getRooms = () => {
     if ( roomCode.length !== 0 ) {
     socket.emit('getRooms', (roomCode))
@@ -78,13 +67,11 @@ function App() {
       } else if (isJoined.isJoined === 'Duplicate') {
         setMsgOnJoin('You are already a member of this room')
       } else {
-        console.log('Unsuccessful')
-        setMsgOnJoin(`Please check that ${roomCode} is a valid code`)
+        setMsgOnJoin(`You are currently in another room. Kindly exit before you attempt to join again`)
       } 
     })} else {
       setMsgOnJoin('You cannot leave the field empty')
-    }
-}
+    }}
 
     const setDisplayName = (e) => {
       setDispName(e.target.value)
@@ -95,16 +82,12 @@ function App() {
       setStep(4)
     }
 
-  console.log(roomid);
-
   useEffect(() => {
     socket.on('receiveMessage', ({message, id, sender, created}) => {
       setMessages([...messages, {message, id, sender, created}])
     })
     scrollRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [messages])
-
-  console.log(roomCode);
   
   const StepOne = () => {
     setStep(1)
@@ -134,8 +117,7 @@ function App() {
       id: socket.id, 
       isModal, 
       unfocusModal, 
-      roomid, 
-      isModalLoading,
+      roomid,
       StepTwo,
       StepOne,
       StepThree,

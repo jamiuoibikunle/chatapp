@@ -8,7 +8,7 @@
   padding: 2rem 1.5rem;
   position: absolute;
   z-index: 1;
-  background-color: white;
+  background-color: #1864AC;
   border-radius: 0.5rem;
   inset: 0;
 }
@@ -24,18 +24,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: white;
 }
 
 .copy {
   margin: 1.5rem 0;
-  color: rgb(82, 82, 82);
+  color: whitesmoke;
 }
 
 .roomid {
   box-sizing: border-box;
   padding: 0.5rem 1rem;
   background-color: whitesmoke;
-  color: rgb(82, 82, 82);
+  color: #1864AC;
   border-radius: 0.5rem;
   display: flex;
   align-items: center;
@@ -43,8 +44,8 @@
 }
 
 .share {
-  background-color: #1864AC;
-  color: white;
+  background-color: white;
+  color: #1864AC;
   box-sizing: border-box;
   width: fit-content;
   padding: 0.5rem 1rem;
@@ -57,6 +58,7 @@
 
 .xmark {
   height: 1.5rem;
+  color: white;
 }
 
 .copyicon {
@@ -66,13 +68,13 @@
 .clipboard {
   background-color: transparent;
   width: fit-content;
-  color: grey;
+  color: #1864AC;
   width: 1.5rem;
   height: 1.5rem;
 }
 
 @media screen and (min-width: 700px) {
-  .popup {
+  .modalwrapper {
     width: 650px;
     margin: auto;
   }

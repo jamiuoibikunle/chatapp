@@ -1,15 +1,25 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from '../styles/FirstPage.module.css'
 import meeting from '../resources/meeting.png'
 import NewMeeting from '../modals/Newmeeting'
 import SocketContext from '../Socket'
 import { ArrowForward } from '@material-ui/icons'
+import { useEffect } from 'react'
 
 const FirstPage = () => {
 
   const socket = useContext(SocketContext)
 
   const [ toggle, setToggle ] = useState(false)
+
+  useEffect(() => {    
+    if (socket.isModal) {
+    setToggle(true)
+    } else {
+      setToggle(false)
+    }
+  }, [socket.isModal])
+
 
   return (
     <main className={styles.homewrapper}>
@@ -30,7 +40,7 @@ const FirstPage = () => {
         <div className={styles.notify}>
           Someone just joined the room.
         </div>
-        <div className={styles.proceed} onClick={socket.StepFour}>
+        <div className={styles.proceed} onClick={socket.StepThree}>
           <ArrowForward fontSize='small' /> Proceed to room
         </div>
       </section>

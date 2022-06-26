@@ -9,20 +9,22 @@ const Test = () => {
 
   return (
     <div>
+      <div className={styles.top}>
+        <div className={styles.welcome}>
+          You are currently in room {socket.roomid}
+        </div>
+      </div>
       {socket.messages.length === 0 && <div className={styles.nochat}>Say hello to start a chat!</div>}
       <section className={styles.chats}>
-
       {socket.messages.map((m) => {
-
         const sentAt = new Date(m.created)
         const hour = sentAt.getHours()
         const min = sentAt.getMinutes()
         
         if (m.id !== socket.id) {
-          
 
           return (
-            <div className={styles.he} ref={socket.scrollRef} key={m.message}>
+            <div className={styles.he} ref={socket.scrollRef} key={m.message + m.created}>
               <p className={styles.hemessagewrapper}>
               <div className={styles.sender}>
                 <div>
@@ -40,7 +42,7 @@ const Test = () => {
           )
         } else {
           return (
-            <div className={styles.me} ref={socket.scrollRef} key={m.message}>
+            <div className={styles.me} ref={socket.scrollRef} key={m.message + m.created}>
               <div className={styles.memessagewrapper}>
               <div className={styles.msg}>
                 {m.message}
